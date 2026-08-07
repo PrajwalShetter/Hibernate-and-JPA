@@ -8,10 +8,11 @@ import com.xworkz.bloodbank.service.impl.DonationServiceImpl;
 public class DonationController {
 
     DonationService donationService = new DonationServiceImpl();
-    boolean saveDonation(DonationDto donation){
+
+    public boolean saveDonation(DonationDto donation){
         return donationService.saveDonation(donation);
     }
-    void getDonation(){
+    public void getDonation(){
         donationService.getDonation();
     }
 }
