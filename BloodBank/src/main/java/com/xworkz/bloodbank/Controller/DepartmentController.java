@@ -1,6 +1,6 @@
 package com.xworkz.bloodbank.Controller;
 
-import com.xworkz.bloodbank.Dao.impl.DepartmentServiceImpl;
+import com.xworkz.bloodbank.service.impl.DepartmentServiceImpl;
 import com.xworkz.bloodbank.Dto.DepartmentDto;
 import com.xworkz.bloodbank.service.DepartmentService;
 
