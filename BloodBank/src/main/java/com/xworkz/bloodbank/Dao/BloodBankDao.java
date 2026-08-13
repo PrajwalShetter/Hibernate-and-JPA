@@ -6,4 +6,5 @@ public interface BloodBankDao {
 
     boolean saveBloodBank(BloodBankEntity bloodBank);
     void getBloodbank();
+    BloodBankEntity getById(int id);
 }
