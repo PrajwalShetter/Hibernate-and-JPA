@@ -5,6 +5,8 @@ import com.xworkz.dominoz.constants.Size;
 import com.xworkz.dominoz.controller.PizzaController;
 import com.xworkz.dominoz.dto.PizzaDto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DominozRunner {
@@ -43,7 +45,8 @@ public class DominozRunner {
                         System.out.println("2. Get Pizza");
                         System.out.println("3. Update Price By Id");
                         System.out.println("4. Delete Pizza By Id");
-                        System.out.println("5. Back");
+                        System.out.println("5. Get All Pizza");
+                        System.out.println("6. Back");
                         System.out.print("Enter Your Choice: ");
 
                         int pizzaChoice = sc.nextInt();
@@ -107,6 +110,22 @@ public class DominozRunner {
                                 break;
 
                             case 5:
+                                System.out.println("\n --- Get All Pizza----");
+
+                                List<PizzaDto> pizzas = pizzaController.getAllPizza();
+
+                                for (PizzaDto pizza : pizzas){
+                                    System.out.println("Id :"+pizza.getId());
+                                    System.out.println("Name :"+pizza.getName());
+                                    System.out.println("size :"+pizza.getSize());
+                                    System.out.println("Category :"+pizza.getCategory());
+                                    System.out.println("Prize :"+pizza.getPrice());
+                                    System.out.println("===================");
+                                }
+
+                                break;
+
+                            case 6:
 
                                 System.out.println("Returning to Main Menu...");
                                 isAdmin = false;
