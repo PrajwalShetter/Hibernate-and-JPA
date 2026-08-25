@@ -4,6 +4,8 @@ import com.xworkz.dominoz.dto.PizzaDto;
 import com.xworkz.dominoz.service.PizzaService;
 import com.xworkz.dominoz.service.impl.pizzaServiceImpl;
 
+import java.util.List;
+
 public class PizzaController {
 
     PizzaService pizzaService = new pizzaServiceImpl();
@@ -22,6 +24,10 @@ public class PizzaController {
 
     public  boolean deletePizzaById(int id){
         return pizzaService.deletePizzaById(id);
+    }
+
+    public List<PizzaDto> getAllPizza(){
+        return pizzaService.getAllPizza();
     }
 
 
