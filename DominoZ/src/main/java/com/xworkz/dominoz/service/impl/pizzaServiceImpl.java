@@ -6,6 +6,10 @@ import com.xworkz.dominoz.dto.PizzaDto;
 import com.xworkz.dominoz.entity.PizzaEntity;
 import com.xworkz.dominoz.service.PizzaService;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class pizzaServiceImpl implements PizzaService {
 
 
@@ -55,5 +59,27 @@ public class pizzaServiceImpl implements PizzaService {
     public boolean deletePizzaById(int id) {
         PizzaDao pizzaDao = new PizzaDaoImpl();
         return pizzaDao.deletePizzaById(id) ;
+    }
+
+
+    @Override
+    public List<PizzaDto> getAllPizza() {
+        PizzaDao pizzaDao = new PizzaDaoImpl();
+        List<PizzaDto> pizzaDtos = new ArrayList<>();
+        List<PizzaEntity> pizzaEntities = pizzaDao.getAllPizza();
+
+        if(pizzaEntities != null){
+
+            pizzaEntities.forEach(pizzaEntity -> {
+                PizzaDto pizza = new PizzaDto();
+                pizza.setId(pizzaEntity.getId());
+                pizza.setCategory(pizzaEntity.getCategory());
+                pizza.setSize(pizzaEntity.getSize());
+                pizza.setName(pizzaEntity.getName());
+                pizza.setPrice(pizzaEntity.getPrice());
+                pizzaDtos.add(pizza);
+            });
+        }
+        return pizzaDtos;
     }
 }

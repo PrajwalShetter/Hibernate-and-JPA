@@ -3,6 +3,8 @@ package com.xworkz.dominoz.service;
 import com.xworkz.dominoz.dto.PizzaDto;
 import com.xworkz.dominoz.entity.PizzaEntity;
 
+import java.util.List;
+
 public interface PizzaService {
 
     boolean savePizza(PizzaDto pizzaDto);
@@ -10,5 +12,6 @@ public interface PizzaService {
     PizzaDto getPizza(int id);
     boolean updatePrizeBYId(int id, double prize);
     boolean deletePizzaById(int id);
+    List<PizzaDto> getAllPizza();
 
 }
