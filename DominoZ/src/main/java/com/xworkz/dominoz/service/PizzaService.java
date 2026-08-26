@@ -13,5 +13,8 @@ public interface PizzaService {
     boolean updatePrizeBYId(int id, double prize);
     boolean deletePizzaById(int id);
     List<PizzaDto> getAllPizza();
+    List<String> getPizzaNames();
+    PizzaDto getPizzaDataByName(String pizzaName);
+    List<PizzaDto> getPizzaByPrize(double prize);
 
 }
