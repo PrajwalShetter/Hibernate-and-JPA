@@ -82,4 +82,52 @@ public class pizzaServiceImpl implements PizzaService {
         }
         return pizzaDtos;
     }
+
+    @Override
+    public List<String> getPizzaNames() {
+        PizzaDao pizzaDao = new PizzaDaoImpl();
+        List<String> names = pizzaDao.getPizzaNames();
+        return names;
+    }
+
+    @Override
+    public PizzaDto getPizzaDataByName(String pizzaName) {
+
+        PizzaDao pizzaDao = new PizzaDaoImpl();
+        PizzaEntity pizzaEntity = pizzaDao.getPizzaDataByName(pizzaName);
+        PizzaDto pizzaDto = new PizzaDto();
+
+        if(pizzaEntity != null){
+            pizzaDto.setName(pizzaEntity.getName());
+            pizzaDto.setSize(pizzaEntity.getSize());
+            pizzaDto.setPrice(pizzaEntity.getPrice());
+            pizzaDto.setId(pizzaEntity.getId());
+            pizzaDto.setCategory(pizzaEntity.getCategory());
+
+        }
+
+        return pizzaDto;
+    }
+
+    @Override
+    public List<PizzaDto> getPizzaByPrize(double prize) {
+
+        PizzaDao pizzaDao = new PizzaDaoImpl();
+        List<PizzaDto> pizzaDtos = new ArrayList<>();
+        List<PizzaEntity> pizzaEntity = pizzaDao.getPizzaByPrize(prize);
+
+        if(pizzaEntity != null){
+
+            pizzaEntity.forEach(pizzaEntity1 -> {
+                PizzaDto pizzaDto = new PizzaDto();
+                pizzaDto.setCategory(pizzaEntity1.getCategory());
+                pizzaDto.setName(pizzaEntity1.getName());
+                pizzaDto.setId(pizzaEntity1.getId());
+                pizzaDto.setPrice(pizzaEntity1.getPrice());
+                pizzaDto.setSize(pizzaEntity1.getSize());
+                pizzaDtos.add(pizzaDto);
+            });
+        }
+        return pizzaDtos;
+    }
 }
