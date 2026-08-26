@@ -30,5 +30,17 @@ public class PizzaController {
         return pizzaService.getAllPizza();
     }
 
+    public List<String> getPizzaNames(){
+        return pizzaService.getPizzaNames();
+    }
+
+    public PizzaDto getPizzaDataByName(String pizzaName){
+        return pizzaService.getPizzaDataByName(pizzaName);
+    }
+
+    public List<PizzaDto> getPizzaByPrize(double prize) {
+     return pizzaService.getPizzaByPrize(prize);
+    }
+
 
 }
