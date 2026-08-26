@@ -88,6 +88,48 @@ public class PizzaDaoImpl implements PizzaDao {
          entityManagerFactory.close();
         return pizzas;
     }
+
+    @Override
+    public List<String> getPizzaNames() {
+
+        String jpql = "select p.name from PizzaEntity p";
+        Query query = entityManager.createQuery(jpql);
+        List<String> names = query.getResultList();
+
+        if(names!= null){
+            System.out.println("there is no names in DB");
+        }
+        entityManager.close();
+        entityManagerFactory.close();
+
+        return names;
+    }
+
+    @Override
+    public PizzaEntity getPizzaDataByName(String pizzaName){
+
+         String jpql = "select p from PizzaEntity p where p.name =: pName";
+
+               Query query = entityManager.createQuery(jpql);
+               query.setParameter("pName" , pizzaName );
+               PizzaEntity pizzaEntity = (PizzaEntity) query.getSingleResult();
+               entityManager.close();
+               entityManagerFactory.close();
+               return pizzaEntity;
+
+    }
+
+    @Override
+    public List<PizzaEntity> getPizzaByPrize(double prize) {
+
+        String jpql = "select p from PizzaEntity p where p.prize <: prize";
+        Query query= entityManager.createQuery(jpql);
+        query.setParameter("prize",prize);
+        List<PizzaEntity> pizzaEntity = query.getResultList();
+        entityManager.close();
+        entityManagerFactory.close();
+        return pizzaEntity;
+    }
 }
 
 

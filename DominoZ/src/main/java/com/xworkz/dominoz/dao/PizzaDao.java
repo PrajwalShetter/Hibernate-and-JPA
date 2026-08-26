@@ -11,4 +11,8 @@ public interface PizzaDao {
    boolean updatePrizeById(int id, double prize);
    boolean deletePizzaById(int id);
    List<PizzaEntity> getAllPizza();
+   List<String> getPizzaNames();
+   PizzaEntity getPizzaDataByName(String pizzaName);
+   List<PizzaEntity> getPizzaByPrize(double prize);
+
 }
