@@ -46,13 +46,32 @@ public class DominozRunner {
                         System.out.println("3. Update Price By Id");
                         System.out.println("4. Delete Pizza By Id");
                         System.out.println("5. Get All Pizza");
-                        System.out.println("6. Back");
+                        System.out.println("6. Get all Pizza Names");
+                        System.out.println("8. Get PizzaData By Name");
+                        System.out.println("9. Get PizzaBy Prize");
+                        System.out.println("7. Back");
                         System.out.print("Enter Your Choice: ");
 
                         int pizzaChoice = sc.nextInt();
                         sc.nextLine();
 
                         switch (pizzaChoice) {
+
+                            case 9:
+                                System.out.println("\n ------- get PizzaBy Prize ------");
+                                System.out.print("Enter the prize :");
+                                double prize = sc.nextDouble();
+                                List<PizzaDto> pizzaDtos = pizzaController.getPizzaByPrize(prize);
+                                pizzaDtos.stream().forEach(w-> System.out.println(w));
+                                break;
+
+                            case 8:
+                                System.out.println("\n ------get PizzaData By Name --------");
+                                System.out.print("Enter pizza name :");
+                                String pizzaName=sc.nextLine();
+                                PizzaDto pizzaDto2 = pizzaController.getPizzaDataByName(pizzaName);
+                                System.out.println(pizzaDto2);
+                                break;
 
                             case 1:
 
@@ -126,6 +145,13 @@ public class DominozRunner {
                                 break;
 
                             case 6:
+                                System.out.println("\n --------Names of all Pizza---------");
+                                List<String> names = pizzaController.getPizzaNames();
+                                for (String pizzaNames : names){
+                                    System.out.println(pizzaNames);
+                                }
+
+                            case 7:
 
                                 System.out.println("Returning to Main Menu...");
                                 isAdmin = false;
