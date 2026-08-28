@@ -1,10 +1,14 @@
 package com.xworkz.dominoz.runner;
 
 import com.xworkz.dominoz.constants.Category;
+import com.xworkz.dominoz.constants.Gender;
 import com.xworkz.dominoz.constants.Size;
+import com.xworkz.dominoz.controller.EmployeeController;
 import com.xworkz.dominoz.controller.PizzaController;
+import com.xworkz.dominoz.dto.EmployeeDto;
 import com.xworkz.dominoz.dto.PizzaDto;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +19,7 @@ public class DominozRunner {
 
         Scanner sc = new Scanner(System.in);
         PizzaController pizzaController = new PizzaController();
+        EmployeeController employeeController = new EmployeeController();
 
         System.out.println("Hi, Welcome to Dominoz");
 
@@ -49,6 +54,10 @@ public class DominozRunner {
                         System.out.println("6. Get all Pizza Names");
                         System.out.println("8. Get PizzaData By Name");
                         System.out.println("9. Get PizzaBy Prize");
+                        System.out.println("10. Add Employee");
+                        System.out.println("11. Get All Employee");
+                        System.out.println("12. Get Employees By Phone");
+                        System.out.println("13. Get Employees By age");
                         System.out.println("7. Back");
                         System.out.print("Enter Your Choice: ");
 
@@ -56,6 +65,57 @@ public class DominozRunner {
                         sc.nextLine();
 
                         switch (pizzaChoice) {
+
+                            case 11:
+                                List<EmployeeDto> employeeDtos= employeeController.getEmployees();
+                                employeeDtos.forEach(e-> System.out.println(e));
+                                break;
+
+                            case 10 :
+                                System.out.println("\n --------ADD EMPLOYEE ------");
+                                System.out.print("Id :");
+                                int empId = sc.nextInt();
+
+                                System.out.print("Name :");
+                                String empName=sc.nextLine();
+                                sc.next();
+
+                                System.out.print("Gender :");
+                                Gender empGender = Gender.valueOf(sc.next().toUpperCase());
+                                sc.nextLine();
+
+                                System.out.print("Age :");
+                                int empAge=sc.nextInt();
+                                sc.nextLine();
+
+                                System.out.print("Email :");
+                                String empEmail = sc.nextLine();
+
+                                System.out.print("Phone :");
+                                long empPhone = sc.nextLong();
+                                sc.nextLine();
+
+                                System.out.print("Salary :");
+                                BigDecimal empSalary = sc.nextBigDecimal();
+                                sc.nextLine();
+
+                                System.out.print("Password :");
+                                String empPassword = sc.nextLine();
+
+                                EmployeeDto employeeDto = new EmployeeDto();
+                                employeeDto.setId(empId);
+                                employeeDto.setName(empName);
+                                employeeDto.setSalary(empSalary);
+                                employeeDto.setPhone(empPhone);
+                                employeeDto.setGender(empGender);
+                                employeeDto.setAge(empAge);
+                                employeeDto.setEmail(empEmail);
+                                employeeDto.setPassword(empPassword);
+
+                                employeeController.saveEmployee(employeeDto);
+
+                                break;
+
 
                             case 9:
                                 System.out.println("\n ------- get PizzaBy Prize ------");
@@ -150,12 +210,36 @@ public class DominozRunner {
                                 for (String pizzaNames : names){
                                     System.out.println(pizzaNames);
                                 }
+                                break;
+
+                            case 12:
+                                System.out.println("\n ------ Get Employees BY phone ----------");
+                                System.out.print("Enter the phoneNo :");
+                                long phone = sc.nextLong();
+                                sc.nextLine();
+                                EmployeeDto employeeDto1 = employeeController.getEmployeeByPhone(phone);
+                                System.out.println(employeeDto1);
+
+                                break;
+
+                            case 13:
+                                System.out.println("\n ----------Get Employees BY Age ---------");
+                                System.out.print("Enter the Age :");
+                                int age = sc.nextInt();
+                                sc.nextLine();
+                                List<EmployeeDto> employeeDtos1 = employeeController.getEmployeeByAge(age);
+                                employeeDtos1.forEach(t-> System.out.println(t));
+
+                                break;
+
 
                             case 7:
 
                                 System.out.println("Returning to Main Menu...");
                                 isAdmin = false;
                                 break;
+
+
 
                             default:
                                 System.out.println("Invalid choice. Please enter 1 to 5.");
